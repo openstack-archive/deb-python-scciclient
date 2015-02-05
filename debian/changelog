@@ -1,0 +1,5 @@
+python-scciclient (0.0.1-1) unstable; urgency=medium
+
+  * Initial release. (Closes: #777121)
+
+ -- Thomas Goirand <zigo@debian.org>  Thu, 05 Feb 2015 11:05:35 +0100
