@@ -47,7 +47,7 @@ Suggests: python-scciclient-doc
 Description: Python ServerView Common Command Interface (SCCI) Client Library - Python 2.x
  This package provides the Python ServerView Common Command Interface (SCCI)
  Client Library, which support FUJITSU iRMC S4 integrated Remote Management
- Controller. This python module may be helpful if you want to use Ironic to
+ Controller. This Python module may be helpful if you want to use Ironic to
  manage a FUJITSU server that has this hardware.
  .
  This package contains the Python 2.x module.
@@ -64,7 +64,7 @@ Suggests: python-scciclient-doc
 Description: Python ServerView Common Command Interface (SCCI) Client Library - Python 3.x
  This package provides the Python ServerView Common Command Interface (SCCI)
  Client Library, which support FUJITSU iRMC S4 integrated Remote Management
- Controller. This python module may be helpful if you want to use Ironic to
+ Controller. This Python module may be helpful if you want to use Ironic to
  manage a FUJITSU server that has this hardware.
  .
  This package contains the Python 3.x module.
@@ -77,7 +77,7 @@ Depends: ${misc:Depends}, ${sphinxdoc:Depends}
 Description: Python ServerView Common Command Interface (SCCI) Client Library - doc
  This package provides the Python ServerView Common Command Interface (SCCI)
  Client Library, which support FUJITSU iRMC S4 integrated Remote Management
- Controller. This python module may be helpful if you want to use Ironic to
+ Controller. This Python module may be helpful if you want to use Ironic to
  manage a FUJITSU server that has this hardware.
  .
  This package contains the documentation.

@@ -1,6 +1,7 @@
 python-scciclient (0.0.1-2) unstable; urgency=medium
 
   * Added missing python-sphinx build-depends.
+  * Fixed capitalization in long desc.
 
  -- Thomas Goirand <zigo@debian.org>  Mon, 16 Feb 2015 23:47:31 +0100
 
