@@ -14,25 +14,23 @@ Build-Depends: debhelper (>= 9),
                python3-pbr,
                python3-setuptools,
 Build-Depends-Indep: python-babel,
-                     python-coverage (>= 3.6),
+                     python-coverage,
                      python-hacking,
-                     python-httpretty (>= 0.8.0),
+                     python-httpretty,
                      python-oslosphinx,
                      python-oslotest (>= 1.2.0),
-                     python-pbr,
                      python-requests,
-                     python-testscenarios (>= 0.4),
-                     python-testtools (>= 0.9.34),
+                     python-testscenarios,
+                     python-testtools,
                      python3-babel,
-                     python3-httpretty (>= 0.8.0),
+                     python3-httpretty,
                      python3-oslotest (>= 1.2.0),
-                     python3-pbr,
                      python3-requests,
                      python3-subunit,
-                     python3-testscenarios (>= 0.4),
-                     python3-testtools (>= 0.9.34),
+                     python3-testscenarios,
+                     python3-testtools,
                      subunit,
-                     testrepository (>= 0.0.18),
+                     testrepository,
 Standards-Version: 3.9.6
 Vcs-Browser: http://anonscm.debian.org/gitweb/?p=openstack/python-scciclient.git
 Vcs-Git: git://anonscm.debian.org/openstack/python-scciclient.git
@@ -40,7 +38,6 @@ Homepage: https://github.com/NaohiroTamura/python-scciclient
 
 Package: python-scciclient
 Architecture: all
-Pre-Depends: dpkg (>= 1.15.6~),
 Depends: python-babel,
          python-pbr,
          python-requests,
@@ -57,7 +54,6 @@ Description: Python ServerView Common Command Interface (SCCI) Client Library - 
 
 Package: python3-scciclient
 Architecture: all
-Pre-Depends: dpkg (>= 1.15.6~),
 Depends: python3-babel,
          python3-pbr,
          python3-requests,
@@ -75,7 +71,6 @@ Description: Python ServerView Common Command Interface (SCCI) Client Library - 
 Package: python-scciclient-doc
 Section: doc
 Architecture: all
-Pre-Depends: dpkg (>= 1.15.6~),
 Depends: ${misc:Depends},
          ${sphinxdoc:Depends},
 Description: Python ServerView Common Command Interface (SCCI) Client Library - doc

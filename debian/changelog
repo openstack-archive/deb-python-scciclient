@@ -4,6 +4,7 @@ python-scciclient (0.1.0-1) unstable; urgency=medium
   * Added missing build-depends on openstack-pkg-tools and inconditionally
     include pkgos.make. Also adds missing build-depends on python{3,}-pbr.
     Thanks to Chris West for the bug report (Closes: #789849).
+  * Removed versions of build-depends already satisfied in Jessie/Trusty.
 
  -- Thomas Goirand <zigo@debian.org>  Fri, 26 Jun 2015 15:50:36 +0200
 
