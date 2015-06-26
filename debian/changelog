@@ -1,3 +1,9 @@
+python-scciclient (0.1.0-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Thomas Goirand <zigo@debian.org>  Fri, 26 Jun 2015 15:50:36 +0200
+
 python-scciclient (0.0.1-2) unstable; urgency=medium
 
   * Added missing python-sphinx build-depends.
