@@ -17,9 +17,14 @@ SCCI functionalities shared between different iRMC modules.
 """
 
 import functools
+import time
 import xml.etree.ElementTree as ET
 
 import requests
+import six
+
+
+DEBUG = False
 
 
 class SCCIError(Exception):
@@ -87,6 +92,10 @@ POWER_ON = _POWER_CMD % "PowerOnCabinet"
 POWER_OFF = _POWER_CMD % "PowerOffCabinet"
 POWER_CYCLE = _POWER_CMD % "PowerOffOnCabinet"
 POWER_RESET = _POWER_CMD % "ResetServer"
+POWER_RAISE_NMI = _POWER_CMD % "RaiseNMI"
+POWER_SOFT_OFF = _POWER_CMD % "RequestShutdownAndOff"
+POWER_SOFT_CYCLE = _POWER_CMD % "RequestShutdownAndReset"
+POWER_CANCEL_SHUTDOWN = _POWER_CMD % "ShutdownRequestCancelled"
 
 
 _VIRTUAL_MEDIA_CMD = '''
@@ -197,14 +206,31 @@ _VIRTUAL_MEDIA_FD_SETTINGS = '''
 '''
 
 
-class SHARETYPE(object):
+class MetaShareType(type):
+    @property
+    def nfs(cls):
+        return cls.NFS
+
+    @property
+    def cifs(cls):
+        return cls.CIFS
+
+
+@six.add_metaclass(MetaShareType)
+class ShareType(object):
     """"Virtual Media Share Type."""
     NFS = 0
     CIFS = 1
 
 
-def scci_cmd(host, userid, password, cmd,
-             port=443, auth_method='basic', client_timeout=60):
+def get_share_type(share_type):
+    """get share type."""
+    return({'nfs': ShareType.nfs,
+            'cifs': ShareType.cifs}[share_type.lower()])
+
+
+def scci_cmd(host, userid, password, cmd, port=443, auth_method='basic',
+             client_timeout=60, async=True, **kwargs):
     """execute SCCI command
 
     This function calls SCCI server modules
@@ -215,6 +241,7 @@ def scci_cmd(host, userid, password, cmd,
     :param port: port number of iRMC
     :param auth_method: irmc_username
     :param client_timeout: timeout for SCCI operations
+    :param async: async call if True, sync call otherwise
     :returns: requests.Response from SCCI server
     :raises: SCCIInvalidInputError if port and/or auth_method params
              are invalid
@@ -243,7 +270,12 @@ def scci_cmd(host, userid, password, cmd,
                           timeout=client_timeout,
                           allow_redirects=False,
                           auth=auth_obj)
-
+        if not async:
+            time.sleep(5)
+        if DEBUG:
+            print(cmd)
+            print(r.text)
+            print("async = %s" % async)
         if r.status_code not in (200, 201):
             raise SCCIClientError(
                 ('HTTP PROTOCOL ERROR, STATUS CODE = %s' %
@@ -252,11 +284,11 @@ def scci_cmd(host, userid, password, cmd,
         result_xml = ET.fromstring(r.text)
         status = result_xml.find("./Value")
         # severity = result_xml.find("./Severity")
-        # message = result_xml.find("./Message")
+        message = result_xml.find("./Message")
         if not int(status.text) == 0:
             raise SCCIClientError(
-                ('SCCI PROTOCOL ERROR, STATUS CODE = %s' %
-                 str(status.text)))
+                ('SCCI PROTOCOL ERROR, STATUS CODE = %s, '
+                 'MESSAGE = %s' % (str(status.text), message.text)))
         else:
             return r
 
@@ -267,8 +299,8 @@ def scci_cmd(host, userid, password, cmd,
         raise SCCIClientError(requests_exception)
 
 
-def get_client(host, userid, password,
-               port=443, auth_method='basic', client_timeout=60):
+def get_client(host, userid, password, port=443, auth_method='basic',
+               client_timeout=60, **kwargs):
     """get SCCI command partial function
 
     This function returs SCCI command partial function
@@ -283,7 +315,7 @@ def get_client(host, userid, password,
 
     return functools.partial(scci_cmd, host, userid, password,
                              port=port, auth_method=auth_method,
-                             client_timeout=client_timeout)
+                             client_timeout=client_timeout, **kwargs)
 
 
 def get_virtual_cd_set_params_cmd(remote_image_server,
@@ -298,7 +330,7 @@ def get_virtual_cd_set_params_cmd(remote_image_server,
     This function returs Virtual CD Media Set Parameters Command
     :param remote_image_server: remote image server name or IP
     :param remote_image_user_domain: domain name of remote image server
-    :param remote_image_share_type: share type of SHARETYPE
+    :param remote_image_share_type: share type of ShareType
     :param remote_image_share_name: share name
     :param remote_image_deploy_iso: deploy ISO image file name
     :param remote_image_username: username of remote image server
@@ -330,7 +362,7 @@ def get_virtual_fd_set_params_cmd(remote_image_server,
     This function returs Virtual FD Media Set Parameters Command
     :param remote_image_server: remote image server name or IP
     :param remote_image_user_domain: domain name of remote image server
-    :param remote_image_share_type: share type of SHARETYPE
+    :param remote_image_share_type: share type of ShareType
     :param remote_image_share_name: share name
     :param remote_image_deploy_iso: deploy ISO image file name
     :param remote_image_username: username of remote image server
