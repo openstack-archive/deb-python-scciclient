@@ -1,6 +1,7 @@
 python-scciclient (0.2.0-1) experimental; urgency=medium
 
   * New upstream release.
+  * Fixed (build-)depends for this release.
 
  -- Thomas Goirand <zigo@debian.org>  Tue, 08 Sep 2015 16:01:47 +0000
 
