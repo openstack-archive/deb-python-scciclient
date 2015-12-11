@@ -1,3 +1,9 @@
+python-scciclient (0.2.0-3) UNRELEASED; urgency=medium
+
+  * Black list test: SCCITestCase.test_get_report_ok.
+
+ -- Thomas Goirand <zigo@debian.org>  Fri, 11 Dec 2015 09:53:32 +0100
+
 python-scciclient (0.2.0-2) unstable; urgency=medium
 
   * Uplodaing to unstable.
