@@ -1,6 +1,10 @@
 python-scciclient (0.2.0-3) UNRELEASED; urgency=medium
 
+  [ Thomas Goirand ]
   * Black list test: SCCITestCase.test_get_report_ok.
+
+  [ Ondřej Nový ]
+  * Fixed VCS URLs (https).
 
  -- Thomas Goirand <zigo@debian.org>  Fri, 11 Dec 2015 09:53:32 +0100
 
