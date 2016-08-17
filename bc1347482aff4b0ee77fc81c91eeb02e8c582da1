@@ -1,0 +1,9 @@
+Code-Review+2: Hironori Shiina <shiina.hironori@jp.fujitsu.com>
+Code-Review+2: Naohiro Tamura <naohirot.openstack@gmail.com>
+Workflow+1: Naohiro Tamura <naohirot.openstack@gmail.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Tue, 24 Nov 2015 05:20:43 +0000
+Reviewed-on: https://review.openstack.org/248997
+Project: openstack/deb-python-scciclient
+Branch: refs/heads/master
