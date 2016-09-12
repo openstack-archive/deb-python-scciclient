@@ -1,4 +1,5 @@
 [gerrit]
 host=review.openstack.org
 port=29418
-project=openstack/python-scciclient.git
+project=openstack/deb-python-scciclient.git
+defaultbranch=debian/newton
